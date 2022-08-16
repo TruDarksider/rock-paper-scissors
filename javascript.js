@@ -5,9 +5,6 @@ function getComputerChoice(){
     else{return "scissors";}
 }
 
-
-  
-
 function playRound(playerSelection, computerSelection){
     computerSelection = getComputerChoice();
     //playerSelection = prompt("Rock, Paper, or Scissors?");
@@ -48,6 +45,17 @@ function gameEnd(gameResult){
     gamePrintout.classList.add('gamePrintout');
     gamePrintout.textContent = 'Game Over! You ' + gameResult + '!';
     gameOver.appendChild(gamePrintout);
+}
+
+function resetBoard(){
+    win = 0;
+    lose = 0;
+    tie = 0;
+    const gameOver = document.querySelector('#gameOver');
+    const roundPrintout = document.querySelector('#roundPrintout');
+    while(gameOver.firstChild){gameOver.firstChild.remove();}
+    while(roundPrintout.firstChild){roundPrintout.firstChild.remove();}
+    updateScoreboard();
 }
 
 function game() {
@@ -96,16 +104,12 @@ makeScoreboard();
 const selection = document.querySelector('.buttons');
 selection.addEventListener('click', (e)=> {
     playerSelection = e.target.id;
+    if(win===5||lose===5){resetBoard();}
     game();
 })
 
 /*
-Website loads with buttons and template
--Scoreboard starts at 0 0 0
-On button press, player selection is made
--computer selection is made after
--winner is determined
-Scoreboard updates with match result
-Another selection can be made until either player has reached 5 points
--New text appears announcing winner
+Things to Fix:
+Game continues after a player reaches 5
+Make pretty
 */
